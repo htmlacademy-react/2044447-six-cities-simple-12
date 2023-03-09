@@ -1,21 +1,12 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import Logo from '../../components/logo/logo';
+import Layout from '../../components/layout/layout';
 
 const Login: React.FC = () => (
-  <div className="page page--gray page--login">
+  <Layout className="page--gray page--login" hasNav={false} pageTitle="Login">
     <Helmet>
       <title>Six Cities. Login</title>
     </Helmet>
-    <header className="header">
-      <div className="container">
-        <div className="header__wrapper">
-          <div className="header__left">
-            <Logo />
-          </div>
-        </div>
-      </div>
-    </header>
 
     <main className="page__main page__main--login">
       <div className="page__login-container container">
@@ -56,7 +47,7 @@ const Login: React.FC = () => (
         </section>
       </div>
     </main>
-  </div>
+  </Layout>
 );
 
 export default Login;

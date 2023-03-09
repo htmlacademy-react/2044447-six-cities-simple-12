@@ -10,7 +10,7 @@ const NotFound: React.FC = () => (
     <Helmet>
       <title>Six Cities. Not Found</title>
     </Helmet>
-    <Logo />
+    <Logo type="header" />
     <div className={styles.container}>
       <h1 className={styles.title}>
         <span>😕</span>
