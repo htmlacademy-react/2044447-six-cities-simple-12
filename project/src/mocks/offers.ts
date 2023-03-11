@@ -1,4 +1,4 @@
-import { Offer } from '../types/offer';
+import { City, Offer } from '../types/offer';
 
 export const offers: Offer[] = [
   {
@@ -28,8 +28,8 @@ export const offers: Offer[] = [
     ],
     isPremium: false,
     location: {
-      latitude: 52.35514938496378,
-      longitude: 4.673877537499948,
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
       zoom: 8,
     },
     maxAdults: 4,
@@ -62,8 +62,8 @@ export const offers: Offer[] = [
     images: ['img/room.jpg'],
     isPremium: true,
     location: {
-      latitude: 52.35514938496332,
-      longitude: 4.673877537499999,
+      latitude: 52.3609553943508,
+      longitude: 4.85309666406198,
       zoom: 8,
     },
     maxAdults: 4,
@@ -96,8 +96,8 @@ export const offers: Offer[] = [
     images: ['img/studio-photos.jpg'],
     isPremium: false,
     location: {
-      latitude: 52.35514938496392,
-      longitude: 4.673877537499911,
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198,
       zoom: 8,
     },
     maxAdults: 1,
@@ -130,8 +130,8 @@ export const offers: Offer[] = [
     images: ['img/apartment-01.jpg', 'img/apartment-02.jpg'],
     isPremium: true,
     location: {
-      latitude: 52.35514938496376,
-      longitude: 4.673877537499953,
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198,
       zoom: 8,
     },
     maxAdults: 8,
@@ -142,3 +142,12 @@ export const offers: Offer[] = [
     type: 'apartment',
   },
 ];
+
+export const CityLocation: City = {
+  location: {
+    latitude: 52.370216,
+    longitude: 4.895168,
+    zoom: 10,
+  },
+  name: 'Amsterdam',
+};
