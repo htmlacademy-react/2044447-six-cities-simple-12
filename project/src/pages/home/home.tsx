@@ -1,43 +1,19 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import Card from '../../components/card/card';
-import Logo from '../../components/logo/logo';
+import Layout from '../../components/layout/layout';
+import ListOffers from '../../components/list-offers/list-offers';
+import { Offer } from '../../types/offer';
 
 type HomeProps = {
   offersCount: number;
+  offers: Offer[];
 };
 
-const Home: React.FC<HomeProps> = ({ offersCount }) => (
-  <>
-    <header className="header">
-      <Helmet>
-        <title>Six Cities. Home</title>
-      </Helmet>
-      <div className="container">
-        <div className="header__wrapper">
-          <div className="header__left">
-            <Logo />
-          </div>
-          <nav className="header__nav">
-            <ul className="header__nav-list">
-              <li className="header__nav-item user">
-                <div className="header__nav-profile">
-                  <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                  <span className="header__user-name user__name">
-                    Oliver.conner@gmail.com
-                  </span>
-                </div>
-              </li>
-              <li className="header__nav-item">
-                <a className="header__nav-link" href="#">
-                  <span className="header__signout">Sign out</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </header>
+const Home: React.FC<HomeProps> = ({ offersCount, offers }) => (
+  <Layout className="page--gray page--main" pageTitle="Home">
+    <Helmet>
+      <title>Six Cities. Home</title>
+    </Helmet>
 
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
@@ -111,9 +87,7 @@ const Home: React.FC<HomeProps> = ({ offersCount }) => (
               </ul>
             </form>
             <div className="cities__places-list places__list tabs__content">
-              {Array.from({ length: offersCount }, (_, I) => (
-                <Card key={I} />
-              ))}
+              <ListOffers offers={offers} />
             </div>
           </section>
           <div className="cities__right-section">
@@ -122,7 +96,7 @@ const Home: React.FC<HomeProps> = ({ offersCount }) => (
         </div>
       </div>
     </main>
-  </>
+  </Layout>
 );
 
 export default Home;
