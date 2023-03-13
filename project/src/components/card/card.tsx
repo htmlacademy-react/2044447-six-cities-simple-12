@@ -1,7 +1,6 @@
 import React from 'react';
 import { getRatingColor } from '../../utils/utils';
 import Badge from '../badge/badge';
-import Bookmark from '../bookmark/bookmark';
 import { Offer } from '../../types/offer';
 import ImagePlace from '../image-place/image-place';
 import { generatePath, Link } from 'react-router-dom';
@@ -64,11 +63,6 @@ const Card: React.FC<CardProps> = ({
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <Bookmark
-            className="place-card__bookmark-button"
-            type="card"
-            classNameSVG="place-card__bookmark-icon"
-          />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
