@@ -4,9 +4,10 @@ import { CITIES } from '../../const/const';
 
 type CitiesProps = {
   currentCity: string;
+  onChangeCity: (city: string) => void;
 };
 
-const Cities: React.FC<CitiesProps> = ({ currentCity }) => (
+const Cities: React.FC<CitiesProps> = ({ currentCity, onChangeCity }) => (
   <div className="tabs">
     <section className="locations container">
       <ul className="locations__list tabs__list">
@@ -16,7 +17,14 @@ const Cities: React.FC<CitiesProps> = ({ currentCity }) => (
           });
           return (
             <li className="locations__item" key={city}>
-              <a className={className} href="/#">
+              <a
+                className={className}
+                href="/#"
+                onClick={(evt) => {
+                  evt.preventDefault();
+                  onChangeCity(city);
+                }}
+              >
                 <span>{city}</span>
               </a>
             </li>
