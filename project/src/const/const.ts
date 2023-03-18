@@ -30,7 +30,6 @@ export const CITIES = [
   'Hamburg',
   'Dusseldorf',
 ];
-export const COUNT_NEAR_OFFER = 3;
 
 export const SortingTypes = [
   'Popular',
@@ -38,3 +37,12 @@ export const SortingTypes = [
   'Price: high to low',
   'Top rated first',
 ];
+
+export enum APIRoute {
+  Offers = '/hotels',
+  Login = '/login',
+  Logout = '/logout',
+}
+
+export const COUNT_NEAR_OFFER = 3;
+export const TIMEOUT_SHOW_ERROR = 2000;

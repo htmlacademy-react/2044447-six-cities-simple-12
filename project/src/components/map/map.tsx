@@ -37,6 +37,16 @@ const Map: React.FC<MapProps> = ({
 
   React.useEffect(() => {
     if (map) {
+      map.flyTo(
+        [city.location.latitude, city.location.longitude],
+        city.location.zoom,
+        { animate: true, duration: 2 }
+      );
+    }
+  }, [map, city]);
+
+  React.useEffect(() => {
+    if (map) {
       offers.forEach((offer) => {
         const marker = new Marker({
           lat: offer.location.latitude,
