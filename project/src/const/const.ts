@@ -31,3 +31,10 @@ export const CITIES = [
   'Dusseldorf',
 ];
 export const COUNT_NEAR_OFFER = 3;
+
+export const SortingTypes = [
+  'Popular',
+  'Price: low to high',
+  'Price: high to low',
+  'Top rated first',
+];

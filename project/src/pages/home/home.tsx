@@ -8,6 +8,7 @@ import Sort from '../../components/sort/sort';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { CityLocation } from '../../mocks/offers';
 import { changeCity } from '../../store/action';
+import { getSortingOffers } from '../../utils/utils';
 
 const Home: React.FC = () => {
   const [selectedOfferId, setSelectedOfferId] = React.useState<number | null>(
@@ -17,6 +18,7 @@ const Home: React.FC = () => {
   const dispatch = useAppDispatch();
   const curentCity = useAppSelector((state) => state.city);
   const offers = useAppSelector((state) => state.offers);
+  const currentSortName = useAppSelector((state) => state.sortName);
 
   const onChangeCity = (city: string) => {
     dispatch(changeCity(city));
@@ -25,6 +27,8 @@ const Home: React.FC = () => {
   const currentOffers = offers.filter(
     (offer) => offer.city.name === curentCity
   );
+
+  const sortingOffers = getSortingOffers(currentOffers, currentSortName);
 
   return (
     <Layout className="page--gray page--main" pageTitle="Home">
@@ -42,9 +46,9 @@ const Home: React.FC = () => {
               <b className="places__found">
                 {currentOffers.length} places to stay in {curentCity}
               </b>
-              <Sort />
+              <Sort currentSortName={currentSortName} />
               <ListOffers
-                offers={currentOffers}
+                offers={sortingOffers}
                 onListItemHover={setSelectedOfferId}
                 cardType="home"
                 classNames="cities__places-list tabs__content"
