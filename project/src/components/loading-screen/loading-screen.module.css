@@ -1,0 +1,27 @@
+.root {
+  margin: auto;
+}
+
+.root svg {
+  display: block;
+  margin: auto;
+  margin-top: 300px;
+}
+
+.root span {
+  display: block;
+  text-align: center;
+  color: #4481c3;
+  font-size: 24px;
+  animation: text 2s ease-in-out infinite;
+}
+
+@keyframes text {
+  50% {
+    color: #a2a2a2;
+  }
+
+  95% {
+    color: #fffcfc;
+  }
+}

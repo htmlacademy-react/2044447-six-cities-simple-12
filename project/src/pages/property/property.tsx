@@ -10,7 +10,7 @@ import PropertyItem from '../../components/property-item/property-item';
 import ReviewForm from '../../components/review-form/review-form';
 import ReviewList from '../../components/review-list/review-list';
 import { COUNT_NEAR_OFFER } from '../../const/const';
-import { CityLocation, offers } from '../../mocks/offers';
+import { useAppSelector } from '../../hooks';
 import { reviews } from '../../mocks/reviews';
 import { Offer } from '../../types/offer';
 import { getRatingColor } from '../../utils/utils';
@@ -18,6 +18,7 @@ import { getRatingColor } from '../../utils/utils';
 const Property: React.FC = () => {
   const { id } = useParams();
   const [room, setRoom] = React.useState<Offer>();
+  const offers = useAppSelector((state) => state.offers);
 
   React.useEffect(() => {
     setRoom(offers.find((offer) => offer.id === Number(id)));
@@ -26,7 +27,9 @@ const Property: React.FC = () => {
   if (!room) {
     return <>Загрузка...</>;
   }
+  const cityLocation = room.city;
 
+  const nearOffers = [...offers.slice(0, COUNT_NEAR_OFFER), room];
   return (
     <Layout pageTitle="Property">
       <Helmet>
@@ -124,8 +127,9 @@ const Property: React.FC = () => {
           </div>
           <Map
             className="property__map"
-            city={CityLocation}
-            offers={offers.slice(0, COUNT_NEAR_OFFER)}
+            city={cityLocation}
+            offers={nearOffers}
+            selectedOfferId={room.id}
           />
         </section>
         <div className="container">

@@ -5,7 +5,7 @@ import ReviewItem from '../review/review';
 const ReviewList: React.FC = () => (
   <ul className="reviews__list">
     {reviews.map((review) => (
-      <ReviewItem key={review.id} review={review} />
+      <ReviewItem key={review.user.name} review={review} />
     ))}
   </ul>
 );
