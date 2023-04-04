@@ -2,12 +2,17 @@ import React from 'react';
 import Cities from '../../components/cities/cities';
 import Layout from '../../components/layout/layout';
 import ListOffers from '../../components/list-offers/list-offers';
+import LoadingScreen from '../../components/loading-screen/loading-screen';
 import MainEmpty from '../../components/main-empty/main-empty';
 import Map from '../../components/map/map';
 import Sort from '../../components/sort/sort';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { changeCity } from '../../store/action';
+import { fetchOffersAction } from '../../store/api-actions';
+import { changeCity } from '../../store/app-slice/app';
+import { getCity, getSortType } from '../../store/app-slice/selectors';
+import { getOffers, getOffersStatus } from '../../store/offers/selectors';
 import { getSortingOffers } from '../../utils/utils';
+import FullPageError from '../full-page-error/full-page-error';
 
 const Home: React.FC = () => {
   const [selectedOfferId, setSelectedOfferId] = React.useState<number | null>(
@@ -15,9 +20,16 @@ const Home: React.FC = () => {
   );
 
   const dispatch = useAppDispatch();
-  const currentCity = useAppSelector((state) => state.city);
-  const offers = useAppSelector((state) => state.offers);
-  const currentSortName = useAppSelector((state) => state.sortName);
+  const currentCity = useAppSelector(getCity);
+  const offers = useAppSelector(getOffers);
+  const currentSortName = useAppSelector(getSortType);
+  const status = useAppSelector(getOffersStatus);
+
+  React.useEffect(() => {
+    if (!offers.length) {
+      dispatch(fetchOffersAction());
+    }
+  }, [dispatch, offers]);
 
   const onChangeCity = (city: string) => {
     dispatch(changeCity(city));
@@ -28,6 +40,14 @@ const Home: React.FC = () => {
   );
 
   const sortingOffers = getSortingOffers(currentOffers, currentSortName);
+
+  if (status.isLoading) {
+    return <LoadingScreen type="big" />;
+  }
+
+  if (status.isError) {
+    return <FullPageError />;
+  }
 
   return (
     <Layout className="page--gray page--main" pageTitle="Home">
@@ -58,6 +78,7 @@ const Home: React.FC = () => {
                   city={sortingOffers[0].city}
                   offers={sortingOffers}
                   selectedOfferId={selectedOfferId}
+                  height="100%"
                 />
               </div>
             </div>

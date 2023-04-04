@@ -1,6 +1,9 @@
 import React from 'react';
-import { useAppDispatch } from '../../hooks';
+import { FetchStatus } from '../../const/const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
+import { getAuthCheckedStatus } from '../../store/user-process/selectors';
+import LoadingScreen from '../loading-screen/loading-screen';
 import styles from './login-form.module.css';
 
 type FieldProps = {
@@ -59,6 +62,9 @@ const LoginForm: React.FC = () => {
     );
   };
 
+  const fetchStatus = useAppSelector(getAuthCheckedStatus);
+  const isLoading = fetchStatus === FetchStatus.Loading;
+
   return (
     <form
       className="login__form form"
@@ -97,8 +103,12 @@ const LoginForm: React.FC = () => {
           <span className={styles.error}>{data.password.errorText}</span>
         )}
       </div>
-      <button className="login__submit form__submit button" type="submit">
-        Sign in
+      <button
+        className="login__submit form__submit button"
+        type="submit"
+        disabled={isLoading}
+      >
+        {isLoading ? <LoadingScreen type="small" /> : 'Sign in'}
       </button>
     </form>
   );

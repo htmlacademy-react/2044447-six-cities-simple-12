@@ -7,3 +7,9 @@ export type Review = {
   rating: number;
   user: User;
 };
+
+export type CreateReviewPayload = {
+  comment: string;
+  rating: number;
+  id: number;
+};

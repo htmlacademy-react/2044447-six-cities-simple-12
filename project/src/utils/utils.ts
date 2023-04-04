@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import { SortingTypes } from '../const/const';
 import { Offer } from '../types/offer';
+import { Review } from '../types/review';
 
 export const getRatingColor = (rating: number) =>
   (Math.round(rating) * 100) / 5;
@@ -22,3 +23,9 @@ export const getSortingOffers = (offers: Offer[], activeSort: string) => {
       return sortingOffers;
   }
 };
+
+export const getSortingComments = (a: Review, b: Review) =>
+  dayjs(b.date).diff(dayjs(a.date));
+
+export const getRandomCity = (cities: string[]) =>
+  cities[Math.floor(Math.random() * cities.length)];

@@ -2,7 +2,7 @@ import React from 'react';
 import cn from 'classnames';
 import { SortingTypes } from '../../const/const';
 import { useAppDispatch } from '../../hooks';
-import { changeSort } from '../../store/action';
+import { changeSort } from '../../store/app-slice/app';
 
 type SortProps = {
   currentSortName: string;
@@ -32,7 +32,7 @@ const Sort: React.FC<SortProps> = ({ currentSortName }) => {
 
   return (
     <form ref={sortRef} className="places__sorting" action="#" method="get">
-      <span className="places__sorting-caption">Sort by</span>
+      <span className="places__sorting-caption">Sort by </span>
       <span
         className="places__sorting-type"
         tabIndex={0}

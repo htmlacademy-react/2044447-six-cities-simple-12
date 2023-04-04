@@ -2,21 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import App from './components/app/app';
-import ErrorMessage from './components/error-message/error-message';
+import { ToastContainer } from 'react-toastify';
+import Notification from './components/notification/notification';
 import { store } from './store';
-import { checkAuthAction, fetchOfferAction } from './store/api-actions';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-store.dispatch(fetchOfferAction());
-store.dispatch(checkAuthAction());
-
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ErrorMessage />
+      <ToastContainer />
+      <Notification />
       <App />
     </Provider>
   </React.StrictMode>
