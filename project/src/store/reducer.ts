@@ -1,9 +1,11 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { AuthorizationStatus, CITIES, SortingTypes } from '../const/const';
 import { Offer } from '../types/offer';
+import { UserData } from '../types/user-data';
 import {
   changeCity,
   changeSort,
+  getInformationUser,
   loadOffers,
   requireAuthorization,
   setError,
@@ -17,6 +19,7 @@ type InitialState = {
   authorizationStatus: AuthorizationStatus;
   isOffersDataLoading: boolean;
   error: string | null;
+  informationUser: UserData | null;
 };
 
 const initialState: InitialState = {
@@ -26,6 +29,7 @@ const initialState: InitialState = {
   authorizationStatus: AuthorizationStatus.Unknown,
   isOffersDataLoading: false,
   error: null,
+  informationUser: null,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -47,6 +51,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setError, (state, action) => {
       state.error = action.payload;
+    })
+    .addCase(getInformationUser, (state, action) => {
+      state.informationUser = action.payload;
     });
 });
 
