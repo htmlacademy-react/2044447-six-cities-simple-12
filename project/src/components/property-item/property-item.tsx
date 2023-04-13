@@ -4,6 +4,8 @@ type PropertyItemProps = {
   item: string;
 };
 
-const PropertyItem: React.FC<PropertyItemProps> = ({ item }) => <li className="property__inside-item">{item}</li>;
+const PropertyItem: React.FC<PropertyItemProps> = ({ item }) => (
+  <li className="property__inside-item">{item}</li>
+);
 
-export default PropertyItem;
+export default React.memo(PropertyItem);

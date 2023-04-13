@@ -11,4 +11,4 @@ const Badge: React.FC<BadgeProps> = ({ className }) => (
   </div>
 );
 
-export default Badge;
+export default React.memo(Badge);

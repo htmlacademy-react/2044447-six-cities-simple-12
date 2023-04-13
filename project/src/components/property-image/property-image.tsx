@@ -10,4 +10,4 @@ const PropertyImage: React.FC<PropertyImageProps> = ({ img }) => (
   </div>
 );
 
-export default PropertyImage;
+export default React.memo(PropertyImage);

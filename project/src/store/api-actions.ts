@@ -2,95 +2,163 @@ import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state.js';
 import { Offer } from '../types/offer';
-import {
-  getInformationUser,
-  loadOffers,
-  redirectToRoute,
-  requireAuthorization,
-  setError,
-  setOffersDataLoadingStatus,
-} from './action';
+import { CreateReviewPayload, Review } from '../types/review';
+import { redirectToRoute } from './action';
 import { saveToken, dropToken } from '../services/token';
-import {
-  APIRoute,
-  AppRoute,
-  AuthorizationStatus,
-  TIMEOUT_SHOW_ERROR,
-} from '../const/const';
+import { APIRoute, AppRoute } from '../const/const';
+import { AuthData } from '../types/auth-data';
+import { UserData } from '../types/user-data';
+import { pushNotification } from './notification/notification';
 
-import { store } from '.';
-import { AuthData } from '../types/auth-data.js';
-import { UserData } from '../types/user-data.js';
+type ThunkOptions = {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+};
 
-export const clearErrorAction = createAsyncThunk('offers/clearError', () => {
-  setTimeout(() => store.dispatch(setError(null)), TIMEOUT_SHOW_ERROR);
+export const fetchOffersAction = createAsyncThunk<
+  Offer[],
+  undefined,
+  ThunkOptions
+>('data/fetchOffers', async (_arg, { dispatch, extra: api }) => {
+  try {
+    const { data } = await api.get<Offer[]>(APIRoute.Offers);
+    return data;
+  } catch (err) {
+    dispatch(
+      pushNotification({
+        type: 'error',
+        message: 'Unfortunately, we can\'t show offers',
+      })
+    );
+    throw err;
+  }
 });
 
-export const fetchOfferAction = createAsyncThunk<
-  void,
-  undefined,
-  {
-    dispatch: AppDispatch;
-    state: State;
-    extra: AxiosInstance;
+export const fetchPropertyOfferAction = createAsyncThunk<
+  Offer,
+  string,
+  ThunkOptions
+>('data/fetchPropertyOffer', async (id, { dispatch, extra: api }) => {
+  try {
+    const { data } = await api.get<Offer>(`${APIRoute.Offers}/${id}`);
+    return data;
+  } catch (err) {
+    dispatch(
+      pushNotification({
+        type: 'error',
+        message: 'Unfortunately, we can\'t show room page',
+      })
+    );
+    throw err;
   }
->('data/fetchOffers', async (_arg, { dispatch, extra: api }) => {
-  dispatch(setOffersDataLoadingStatus(true));
-  const { data } = await api.get<Offer[]>(APIRoute.Offers);
-  dispatch(setOffersDataLoadingStatus(false));
-  dispatch(loadOffers(data));
+});
+
+export const fetchNearbyAction = createAsyncThunk<
+  Offer[],
+  string,
+  ThunkOptions
+>('data/fetchNearbyOffers', async (id, { dispatch, extra: api }) => {
+  try {
+    const { data } = await api.get<Offer[]>(`${APIRoute.Offers}/${id}/nearby`);
+    return data;
+  } catch (err) {
+    dispatch(
+      pushNotification({
+        type: 'error',
+        message: 'Unfortunately, we can\'t show nearby offers',
+      })
+    );
+    throw err;
+  }
+});
+
+export const fetchCommentsAction = createAsyncThunk<
+  Review[],
+  number,
+  ThunkOptions
+>('data/comments', async (id, { dispatch, extra: api }) => {
+  try {
+    const { data } = await api.get<Review[]>(`${APIRoute.Comments}${id}`);
+    return data;
+  } catch (err) {
+    dispatch(
+      pushNotification({
+        type: 'error',
+        message: 'Unfortunately, we can\'t show comments',
+      })
+    );
+    throw err;
+  }
+});
+
+export const postCommentAction = createAsyncThunk<
+  Review[],
+  CreateReviewPayload,
+  ThunkOptions
+>('data/comment', async ({ comment, rating, id }, { dispatch, extra: api }) => {
+  try {
+    const { data } = await api.post<Review[]>(`${APIRoute.Comments}${id}`, {
+      comment,
+      rating,
+    });
+    return data;
+  } catch (err) {
+    dispatch(
+      pushNotification({ type: 'error', message: 'Please repeat send comment' })
+    );
+    throw err;
+  }
 });
 
 export const checkAuthAction = createAsyncThunk<
-  void,
+  UserData,
   undefined,
-  {
-    dispatch: AppDispatch;
-    state: State;
-    extra: AxiosInstance;
-  }
+  ThunkOptions
 >('user/checkAuth', async (_arg, { dispatch, extra: api }) => {
   try {
     const { data } = await api.get<UserData>(APIRoute.Login);
-    dispatch(requireAuthorization(AuthorizationStatus.Auth));
-    dispatch(getInformationUser(data));
-  } catch {
-    dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+    return data;
+  } catch (err) {
+    dispatch(
+      pushNotification({ type: 'info', message: 'More features after login' })
+    );
+    throw err;
   }
 });
 
-export const loginAction = createAsyncThunk<
-  void,
-  AuthData,
-  {
-    dispatch: AppDispatch;
-    state: State;
-    extra: AxiosInstance;
-  }
->(
+export const loginAction = createAsyncThunk<UserData, AuthData, ThunkOptions>(
   'user/login',
   async ({ login: email, password }, { dispatch, extra: api }) => {
-    const { data } = await api.post<UserData>(APIRoute.Login, {
-      email,
-      password,
-    });
-    saveToken(data.token);
-    dispatch(requireAuthorization(AuthorizationStatus.Auth));
-    dispatch(getInformationUser(data));
-    dispatch(redirectToRoute(AppRoute.Root));
+    try {
+      const { data } = await api.post<UserData>(APIRoute.Login, {
+        email,
+        password,
+      });
+      saveToken(data.token);
+      dispatch(redirectToRoute(AppRoute.Root));
+      return data;
+    } catch (err) {
+      dispatch(
+        pushNotification({ type: 'error', message: 'Please repeat log in' })
+      );
+      throw err;
+    }
   }
 );
 
-export const logoutAction = createAsyncThunk<
-  void,
-  undefined,
-  {
-    dispatch: AppDispatch;
-    state: State;
-    extra: AxiosInstance;
+export const logoutAction = createAsyncThunk<void, undefined, ThunkOptions>(
+  'user/logout',
+  async (_arg, { dispatch, extra: api }) => {
+    try {
+      await api.delete(APIRoute.Logout);
+      dropToken();
+      dispatch(fetchOffersAction());
+    } catch (err) {
+      dispatch(
+        pushNotification({ type: 'error', message: 'Please repeat log out' })
+      );
+      throw err;
+    }
   }
->('user/logout', async (_arg, { dispatch, extra: api }) => {
-  await api.delete(APIRoute.Logout);
-  dropToken();
-  dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
-});
+);

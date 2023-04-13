@@ -1,0 +1,52 @@
+.root {
+  margin: 20px 220px;
+}
+
+.container {
+  margin: 200px;
+  margin-bottom: 80px;
+}
+
+.title {
+  text-align: center;
+  font-style: oblique;
+}
+
+.title span {
+  font-style: normal;
+}
+
+.text {
+  text-align: center;
+  font-style: oblique;
+}
+
+.button {
+  display: block;
+  margin: 0 auto;
+  padding: 20px;
+  border: none;
+  text-shadow: 1px 0 0, 0.5px 0 0, -1px 0 0;
+  color: #ffffff;
+  background-position: 100% 0;
+  transform: skew(-15deg);
+  border-radius: 3px;
+  cursor: pointer;
+  background-color: #4481c3;
+  letter-spacing: 0.06em;
+  transition: all 0.2s ease-in-out;
+}
+
+.button:hover {
+  background-image: linear-gradient(
+    to right,
+    #7faee0,
+    #4481c3,
+    #93b3d6,
+    #3c70a8
+  );
+  color: #f1efef;
+  box-shadow: 0 4px 15px 0 rgb(65 132 234 / 75%);
+  background-size: 300% 100%;
+  transition: all 0.2s ease-in-out;
+}

@@ -30,4 +30,4 @@ const Logo: React.FC<LogoProps> = ({ type }) => {
     </Link>
   );
 };
-export default Logo;
+export default React.memo(Logo);

@@ -44,4 +44,4 @@ const ReviewItem: React.FC<ReviewItemProps> = ({ review }) => {
   );
 };
 
-export default ReviewItem;
+export default React.memo(ReviewItem);
