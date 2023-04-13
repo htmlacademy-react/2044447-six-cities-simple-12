@@ -14,4 +14,4 @@ const ReviewList: React.FC<ReviewListProps> = ({ comments }) => (
   </ul>
 );
 
-export default ReviewList;
+export default React.memo(ReviewList);

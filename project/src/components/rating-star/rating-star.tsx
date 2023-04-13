@@ -34,4 +34,4 @@ const RatingStar: React.FC<RatingStarProps> = ({
   </>
 );
 
-export default RatingStar;
+export default React.memo(RatingStar);

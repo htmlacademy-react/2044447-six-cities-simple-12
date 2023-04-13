@@ -20,4 +20,4 @@ const MainEmpty: React.FC<MainEmptyProps> = ({ city }) => (
   </div>
 );
 
-export default MainEmpty;
+export default React.memo(MainEmpty);

@@ -94,4 +94,4 @@ const HeaderNav: React.FC = () => {
   );
 };
 
-export default HeaderNav;
+export default React.memo(HeaderNav);
