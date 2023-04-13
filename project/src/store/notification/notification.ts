@@ -2,7 +2,7 @@ import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const/const';
 import { INotification } from '../../types/notification';
 
-type notificationState = {
+export type notificationState = {
   notifications: INotification[];
 };
 

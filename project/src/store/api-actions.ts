@@ -37,7 +37,7 @@ export const fetchOffersAction = createAsyncThunk<
 
 export const fetchPropertyOfferAction = createAsyncThunk<
   Offer,
-  string,
+  number,
   ThunkOptions
 >('data/fetchPropertyOffer', async (id, { dispatch, extra: api }) => {
   try {
@@ -56,7 +56,7 @@ export const fetchPropertyOfferAction = createAsyncThunk<
 
 export const fetchNearbyAction = createAsyncThunk<
   Offer[],
-  string,
+  number,
   ThunkOptions
 >('data/fetchNearbyOffers', async (id, { dispatch, extra: api }) => {
   try {

@@ -1,13 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { FetchStatus, NameSpace } from '../../const/const';
-import { Review } from '../../types/review';
+import { CommentsData } from '../../types/state';
 import { fetchCommentsAction, postCommentAction } from '../api-actions';
-
-type CommentsData = {
-  comments: Review[];
-  commentsStatus: FetchStatus;
-  commentStatus: FetchStatus;
-};
 
 const initialState: CommentsData = {
   comments: [],

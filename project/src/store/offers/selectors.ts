@@ -3,8 +3,10 @@ import { FetchStatus, NameSpace } from '../../const/const';
 import { Offer } from '../../types/offer';
 import { State } from '../../types/state';
 
-export const getOffers = (state: State): Offer[] =>
-  state[NameSpace.Offers].offers;
+export const getOffers = createSelector(
+  (state: State): Offer[] => state[NameSpace.Offers].offers,
+  (houses) => ({ offers: houses })
+);
 
 export const getStatus = (state: State): FetchStatus =>
   state[NameSpace.Offers].offersStatus;

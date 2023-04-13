@@ -23,8 +23,7 @@ const ListOffers: React.FC<ListOffersProps> = ({
         key={offer.id}
         offer={offer}
         cardType={cardType}
-        onMouseEnter={() => onListItemHover?.(offer.id)}
-        onMouseLeave={() => onListItemHover?.(null)}
+        onCardHover={onListItemHover}
       />
     ))}
   </div>

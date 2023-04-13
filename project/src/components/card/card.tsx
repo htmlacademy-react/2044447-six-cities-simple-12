@@ -8,8 +8,7 @@ import { AppRoute } from '../../const/const';
 
 type CardProps = {
   offer: Offer;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
+  onCardHover?: (id: number | null) => void;
   cardType: 'home' | 'property';
 };
 
@@ -27,12 +26,7 @@ const cardClassnames = {
   },
 };
 
-const Card: React.FC<CardProps> = ({
-  offer,
-  onMouseEnter,
-  onMouseLeave,
-  cardType,
-}) => {
+const Card: React.FC<CardProps> = ({ offer, onCardHover, cardType }) => {
   const { price, previewImage, title, type, isPremium, rating, id } = offer;
 
   const link = generatePath(AppRoute.Property, {
@@ -45,8 +39,8 @@ const Card: React.FC<CardProps> = ({
   return (
     <article
       className={article}
-      onMouseOver={() => onMouseEnter?.()}
-      onMouseLeave={() => onMouseLeave?.()}
+      onMouseOver={() => onCardHover?.(id)}
+      onMouseLeave={() => onCardHover?.(null)}
     >
       {isPremium && <Badge className="place-card__mark" />}
       <div className={image}>
