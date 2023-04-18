@@ -1,14 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { FetchStatus, NameSpace } from '../../const/const';
-import { Offer } from '../../types/offer';
+import { NearbyOffersData } from '../../types/state';
 import { fetchNearbyAction } from '../api-actions';
 
-type nearbyOffersData = {
-  offers: Offer[];
-  offersStatus: FetchStatus;
-};
-
-const initialState: nearbyOffersData = {
+const initialState: NearbyOffersData = {
   offers: [],
   offersStatus: FetchStatus.Idle,
 };

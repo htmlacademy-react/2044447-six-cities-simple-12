@@ -21,7 +21,7 @@ const Home: React.FC = () => {
 
   const dispatch = useAppDispatch();
   const currentCity = useAppSelector(getCity);
-  const offers = useAppSelector(getOffers);
+  const { offers } = useAppSelector(getOffers);
   const currentSortName = useAppSelector(getSortType);
   const status = useAppSelector(getOffersStatus);
 
@@ -40,6 +40,11 @@ const Home: React.FC = () => {
   );
 
   const sortingOffers = getSortingOffers(currentOffers, currentSortName);
+
+  const handleCardHover = React.useCallback(
+    (id: number | null) => setSelectedOfferId(id),
+    []
+  );
 
   if (status.isLoading) {
     return <LoadingScreen type="big" />;
@@ -67,7 +72,7 @@ const Home: React.FC = () => {
                 <Sort currentSortName={currentSortName} />
                 <ListOffers
                   offers={sortingOffers}
-                  onListItemHover={setSelectedOfferId}
+                  onListItemHover={handleCardHover}
                   cardType="home"
                   classNames="cities__places-list tabs__content"
                 />

@@ -1,5 +1,4 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
-
 import { getToken } from './token';
 
 const BACKEND_URL = 'https://12.react.pages.academy/six-cities-simple';

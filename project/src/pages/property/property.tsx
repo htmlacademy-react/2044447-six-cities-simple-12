@@ -42,8 +42,8 @@ const Property: React.FC = () => {
   React.useEffect(() => {
     if (id) {
       dispatch(fetchCommentsAction(Number(id)));
-      dispatch(fetchNearbyAction(id));
-      dispatch(fetchPropertyOfferAction(id));
+      dispatch(fetchNearbyAction(Number(id)));
+      dispatch(fetchPropertyOfferAction(Number(id)));
     }
   }, [id, dispatch, statusLogOut]);
 

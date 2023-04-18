@@ -75,6 +75,7 @@ const Map: React.FC<MapProps> = ({
       className={cn('map', className)}
       style={{ height: height }}
       ref={mapRef}
+      data-testid="map"
     >
     </section>
   );
