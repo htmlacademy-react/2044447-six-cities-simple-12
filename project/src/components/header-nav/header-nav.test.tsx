@@ -8,9 +8,9 @@ import {
   NameSpace,
 } from '../../const/const';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import userEvent from '@testing-library/user-event';
 import HeaderNav from './header-nav';
 import { makeFakeOffers, makeFakeUserData } from '../../mocks/mocks';
+import userEvent from '@testing-library/user-event';
 
 const fakeOffers = makeFakeOffers();
 const fakeUserData = makeFakeUserData();
