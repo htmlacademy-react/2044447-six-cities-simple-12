@@ -13,7 +13,6 @@ describe('Component: Badge', () => {
     );
 
     const paragraphElement = screen.getByText('Premium');
-
     expect(paragraphElement).toBeInTheDocument();
   });
 });

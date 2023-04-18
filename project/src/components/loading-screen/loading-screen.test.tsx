@@ -11,7 +11,6 @@ describe('Component: LoadingScreen', () => {
     );
 
     const paragraphElement = screen.getByText('Loading...');
-
     expect(paragraphElement).toBeInTheDocument();
   });
 });
