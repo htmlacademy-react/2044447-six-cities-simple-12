@@ -5,9 +5,9 @@ import { AuthorizationStatus, FetchStatus } from '../../const/const';
 import { HelmetProvider } from 'react-helmet-async';
 import { makeFakeUserData } from '../../mocks/mocks';
 import { UserProcess } from '../../types/state';
-import userEvent from '@testing-library/user-event';
 import Login from './login';
 import { MemoryRouter } from 'react-router-dom';
+import userEvent from '@testing-library/user-event';
 
 const mockStore = configureMockStore();
 
