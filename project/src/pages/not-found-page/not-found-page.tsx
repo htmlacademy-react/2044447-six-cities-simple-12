@@ -15,12 +15,12 @@ const NotFound: React.FC = () => (
       <h1 className={styles.title}>
         <span>😕</span>
         <br />
-        Ничего не найдено
+        Not found
       </h1>
-      <p className={styles.text}>К сожалению, данная страница отстутвует</p>
+      <p className={styles.text}>Unfortunately, nothing found</p>
     </div>
     <Link to="/">
-      <button className={styles.button}>Нажмите для возврата на главную</button>
+      <button className={styles.button}>Click to return to home</button>
     </Link>
   </div>
 );

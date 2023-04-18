@@ -41,6 +41,7 @@ const Card: React.FC<CardProps> = ({ offer, onCardHover, cardType }) => {
       className={article}
       onMouseOver={() => onCardHover?.(id)}
       onMouseLeave={() => onCardHover?.(null)}
+      data-testid="offerItem"
     >
       {isPremium && <Badge className="place-card__mark" />}
       <div className={image}>
