@@ -7,7 +7,7 @@ type ReviewListProps = {
 };
 
 const ReviewList: React.FC<ReviewListProps> = ({ comments }) => (
-  <ul className="reviews__list">
+  <ul className="reviews__list" data-testid="reviewList">
     {comments.map((comment) => (
       <ReviewItem key={comment.id} review={comment} />
     ))}

@@ -11,7 +11,7 @@ const ReviewItem: React.FC<ReviewItemProps> = ({ review }) => {
   const { avatarUrl, isPro, name } = user;
 
   return (
-    <li className="reviews__item" data-testid="reviewItem">
+    <li className="reviews__item">
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
           <img

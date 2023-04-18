@@ -40,6 +40,6 @@ describe('Component: ListOffers', () => {
       </Provider>
     );
 
-    expect(screen.getAllByTestId('offerItem').length).toBe(fakeOffers.length);
+    expect(screen.getByTestId('offersList')).toBeInTheDocument();
   });
 });

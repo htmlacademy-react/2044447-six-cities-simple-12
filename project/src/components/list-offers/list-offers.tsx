@@ -17,7 +17,7 @@ const ListOffers: React.FC<ListOffersProps> = ({
   cardType,
   classNames,
 }) => (
-  <div className={cn('places__list', classNames)}>
+  <div className={cn('places__list', classNames)} data-testid="offersList">
     {offers.map((offer) => (
       <Card
         key={offer.id}

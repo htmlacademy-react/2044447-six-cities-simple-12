@@ -46,8 +46,6 @@ describe('Async actions', () => {
     ThunkDispatch<State, typeof api, Action>
   >(middlewares);
 
-  //OFFERS
-
   it('should fetch offers when server return 200', async () => {
     const store = mockStore();
     mockAPI.onGet(APIRoute.Offers).reply(200, offers);
@@ -96,8 +94,6 @@ describe('Async actions', () => {
     ]);
   });
 
-  //AUTH
-
   it('should authorization status is «auth» when server return 200', async () => {
     const store = mockStore();
     mockAPI.onGet(APIRoute.Login).reply(200, user);
@@ -138,8 +134,6 @@ describe('Async actions', () => {
       'secret'
     );
   });
-
-  //REVIEWS
 
   it('should fetch reviews action when server returns 200', async () => {
     const store = mockStore();
