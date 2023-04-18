@@ -38,6 +38,7 @@ const ReviewForm: React.FC = () => {
           id: Number(id),
         })
       );
+      evt.currentTarget.reset();
     }
   };
 
